@@ -13,7 +13,11 @@ import (
 //go:embed resources/*.gohtml
 var webTemplate embed.FS
 
+//go:embed resources/*.html
+var htmlEmbed embed.FS
+
 var myTemplate = template.Must(template.ParseFS(webTemplate, "resources/*.gohtml"))
+var htmlTemplate = template.Must(template.ParseFS(htmlEmbed, "resources/*.html"))
 
 func TemplateCaching(w http.ResponseWriter, r *http.Request) {
 	myTemplate.ExecuteTemplate(w, "simple.gohtml", "Hello template caching")
